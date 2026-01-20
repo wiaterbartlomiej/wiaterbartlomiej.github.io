@@ -158,10 +158,12 @@
     /* HERO – PIERWSZY EKRAN */
 
     .hero {
-      min-height: calc(100vh - 80px);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
       gap: 2.5rem;
     }
 
@@ -438,6 +440,36 @@
         display: none;
       }
     }
+    
+    @keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-name span {
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+.hero-name span:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.hero-name span:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.hero-tagline {
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 1.2s;
+  opacity: 0;
+}
   </style>
 </head>
 <body>
