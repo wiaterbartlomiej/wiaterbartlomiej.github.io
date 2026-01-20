@@ -471,6 +471,22 @@
   animation-delay: 1.2s;
   opacity: 0;
 }
+    .hero-name,
+.hero-tagline {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-hidden {
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+}
+
+.hero-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+    
   </style>
 </head>
 <body>
@@ -494,12 +510,12 @@
     <!-- HERO -->
     <section class="hero">
       <div>
-        <div class="hero-name">
+        <div class="hero-name hero-visible">
           <!-- ZMIEŃ NA SWOJĄ FORMĘ IMIENIA I NAZWISKA -->
           <span>Bartłomiej</span>
           <span>Wiater</span>
         </div>
-        <p class="hero-tagline">
+        <p class="hero-tagline hero-visible">
           aktor &nbsp;•&nbsp; lektor &nbsp;•&nbsp; wokalista
         </p>
       </div>
@@ -682,5 +698,30 @@
     updateBackground();
     setInterval(updateBackground, 7000); // co 7 sekund zmiana zdjęcia
   </script>
+  
+  <script>
+  const heroName = document.querySelector(".hero-name");
+  const heroTagline = document.querySelector(".hero-tagline");
+
+  function toggleHeroVisibility() {
+    const scrollY = window.scrollY;
+
+    if (scrollY < 100) {
+      heroName.classList.add("hero-visible");
+      heroName.classList.remove("hero-hidden");
+      heroTagline.classList.add("hero-visible");
+      heroTagline.classList.remove("hero-hidden");
+    } else {
+      heroName.classList.add("hero-hidden");
+      heroName.classList.remove("hero-visible");
+      heroTagline.classList.add("hero-hidden");
+      heroTagline.classList.remove("hero-visible");
+    }
+  }
+
+  window.addEventListener("scroll", toggleHeroVisibility);
+  window.addEventListener("load", toggleHeroVisibility);
+</script>
+  
 </body>
 </html>
