@@ -63,37 +63,6 @@
   opacity: 1;
 }
 
-.bg-slideshow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  filter: blur(12px) brightness(0.55);
-  transform: scale(1.05);
-    }
-    .bg-slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
-
-.bg-slide::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  filter: blur(12px) brightness(0.55);
-  transform: scale(1.1);
-}
-
-.bg-slide.active {
-  opacity: 1;
-}
-
     .bg-overlay {
       position: fixed;
       inset: 0;
@@ -781,27 +750,6 @@
 
   window.addEventListener("scroll", toggleHeroVisibility);
   window.addEventListener("load", toggleHeroVisibility);
-</script>
-  
-  <script>
-  const images = [
-    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-    "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
-    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
-  ];
-
-  let index = 0;
-  const bg = document.querySelector(".bg-slideshow");
-
-  // ustawiamy pierwsze zdjęcie od razu
-  bg.style.backgroundImage = `url('${images[0]}')`;
-
-  function changeBackground() {
-    index = (index + 1) % images.length;
-    bg.style.backgroundImage = `url('${images[index]}')`;
-  }
-
-  setInterval(changeBackground, 6000);
 </script>
   
 </body>
