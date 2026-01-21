@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio aktorskie Bartłomieja Wiatera – zdjęcia, informacje, doświadczenie, kontakt." />
   <style>
+    :root {
+      --bg-main: #05060a;
+      --bg-secondary: #10131b;
+      --accent: #c7a46a;
+      --accent-soft: rgba(199, 164, 106, 0.25);
+      --text-main: #f5f5f5;
+      --text-muted: #b3b3b3;
+      --max-width: 960px;
+      --transition-fast: 0.25s ease;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,35 +25,29 @@
 
     html, body {
       height: 100%;
-      font-family: system-ui, sans-serif;
-      background-color: #000;
-      color: #f5f5f5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
       scroll-behavior: smooth;
-      min-height: 100vh;
+    }
+
+    body {
+      position: relative;
       overflow-x: hidden;
     }
+
+    /* TŁO ZE ZDJĘCIAMI */
 
     .bg-slideshow {
       position: fixed;
       inset: 0;
       z-index: -2;
-      overflow: hidden;
-    }
-
-    .bg-slide {
-      position: absolute;
-      inset: 0;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      filter: blur(4px) brightness(0.55);
-      transform: scale(1.1);
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-
-    .bg-slide.active {
-      opacity: 1;
+      filter: blur(6px) brightness(0.35);
+      transform: scale(1.05);
+      transition: background-image 1s ease-in-out;
     }
 
     .bg-overlay {
@@ -54,17 +59,19 @@
       pointer-events: none;
     }
 
+    /* NAWIGACJA */
+
     header {
       position: sticky;
       top: 0;
       z-index: 10;
       backdrop-filter: blur(14px);
-      background: transparent;
+      background: linear-gradient(to bottom, rgba(5,6,10,0.95), rgba(5,6,10,0.75));
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
     .nav {
-      max-width: 960px;
+      max-width: var(--max-width);
       margin: 0 auto;
       padding: 0.75rem 1.5rem;
       display: flex;
@@ -76,7 +83,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #b3b3b3;
+      color: var(--text-muted);
     }
 
     .nav-links {
@@ -86,11 +93,11 @@
     }
 
     .nav-links a {
-      color: #b3b3b3;
+      color: var(--text-muted);
       text-decoration: none;
       position: relative;
       padding-bottom: 0.15rem;
-      transition: color 0.25s ease;
+      transition: color var(--transition-fast);
     }
 
     .nav-links a::after {
@@ -100,98 +107,347 @@
       bottom: 0;
       width: 0;
       height: 1px;
-      background: #c7a46a;
-      transition: width 0.25s ease;
+      background: var(--accent);
+      transition: width var(--transition-fast);
     }
 
     .nav-links a:hover {
-      color: #f5f5f5;
+      color: var(--text-main);
     }
 
     .nav-links a:hover::after {
       width: 100%;
     }
 
+    /* SEKCJE */
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    section {
+      margin: 4rem 0;
+      position: relative;
+    }
+
+    section:first-of-type {
+      margin-top: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    /* HERO – PIERWSZY EKRAN */
+
     .hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 80px);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      text-align: center;
       gap: 2.5rem;
-      padding: 0 1.5rem;
     }
 
     .hero-name {
       font-size: clamp(2.6rem, 5vw, 3.4rem);
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      text-align: center;
+    }
+
+    .hero-name span {
+      display: block;
     }
 
     .hero-tagline {
-      color: #b3b3b3;
+      text-align: center;
+      color: var(--text-muted);
       font-size: 0.95rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .hero-hidden {
-      opacity: 0;
-      transform: translateY(-30px);
+    .hero-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .hero-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.35);
+      padding: 0.75rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(199,164,106,0.7);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.45);
+      color: var(--text-main);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #f0d29a);
+      color: #05060a;
+      border-color: transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent-soft);
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    /* KARTY / BLOKI */
+
+    .card {
+      background: rgba(5,6,10,0.9);
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, rgba(199,164,106,0.12), transparent 55%);
+      opacity: 0.7;
       pointer-events: none;
     }
 
-    .hero-visible {
-      opacity: 1;
-      transform: translateY(0);
+    .card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.75rem;
+      align-items: flex-start;
     }
 
     @media (max-width: 768px) {
-      .hero {
-        padding: 2rem 1.5rem;
-        gap: 1.5rem;
+      .grid-2 {
+        grid-template-columns: 1fr;
       }
-
-      .hero-name {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        word-break: break-word;
+      .hero-bottom {
+        flex-direction: column;
       }
-
-      .hero-tagline {
-        font-size: 0.85rem;
-        line-height: 1.4;
-        max-width: 90%;
-        margin: 0 auto;
-      }
-
       .nav {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
       }
+    }
 
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 1rem;
+    /* LISTY, TAGI */
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.5);
+      color: var(--text-muted);
+    }
+
+    /* GALERIA */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.6);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease, filter 0.8s ease;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    /* LINKI / KONTAKT */
+
+    .links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .link-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.55);
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .link-item span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .link-item:hover {
+      background: rgba(0,0,0,0.85);
+      border-color: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    /* DELIKATNE PRZENIKANIE ZDJĘĆ NA TEKST */
+
+    .floating-photo {
+      position: absolute;
+      right: -40px;
+      top: 40px;
+      width: 220px;
+      height: 320px;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      opacity: 0.16;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.7);
+    }
+
+    .floating-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(10%);
+    }
+
+    @media (max-width: 900px) {
+      .floating-photo {
+        display: none;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="bg-slideshow">
-    <div class="bg-slide active"></div>
-    <div class="bg-slide"></div>
-  </div>
+  <!-- TŁO ZE ZDJĘCIAMI – PODMIENISZ LINKI W SKRYPCIE NA DOLE -->
+  <div class="bg-slideshow" id="bg-slideshow"></div>
   <div class="bg-overlay"></div>
 
   <header>
     <nav class="nav">
-      <div class="nav-title">PORTFOLIO AKTORSKIE</div>
+      <div class="nav-title">Portfolio aktorskie</div>
       <div class="nav-links">
         <a href="#o-mnie">O mnie</a>
         <a href="#doswiadczenie">Doświadczenie</a>
@@ -202,68 +458,202 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div>
-        <div class="hero-name hero-visible">
-          <span>BARTŁOMIEJ</span>
-          <span>WIATER</span>
+        <div class="hero-name">
+          <!-- ZMIEŃ NA SWOJĄ FORMĘ IMIENIA I NAZWISKA -->
+          <span>Bartłomiej</span>
+          <span>Wiater</span>
         </div>
-        <p class="hero-tagline hero-hidden">
-          AKTOR • LEKTOR • WOKALISTA
+        <p class="hero-tagline">
+          aktor &nbsp;•&nbsp; współpraca &nbsp;•&nbsp; zaufanie
         </p>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          Otwartość, spokój i pełne zaangażowanie w rolę
+        </div>
+        <div class="hero-cta">
+          <a href="#kontakt" class="btn btn-primary">Skontaktuj się</a>
+          <a href="#galeria" class="btn">Zobacz zdjęcia</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- O MNIE -->
+    <section id="o-mnie">
+      <div class="section-label">O mnie</div>
+      <div class="grid-2">
+        <div>
+          <h2 class="section-title">Kim jestem na scenie i przed kamerą</h2>
+          <p class="section-text">
+            <!-- TUTAJ WSTAW SWÓJ TEKST O SOBIE -->
+            Jestem aktorem, dla którego najważniejsze jest prawdziwe spotkanie – z partnerem na scenie,
+            z kamerą i z widzem. Pracuję w spokojnej, uważnej atmosferze, ale zawsze z pełnym
+            zaangażowaniem i gotowością do szukania nowych rozwiązań.
+            <br /><br />
+            Ukończyłem <!-- PODMIENIĆ: SZKOŁA / KURS / UCZELNIA --> 
+            <strong>[tu wpisz szkołę / uczelnię / kurs aktorski]</strong>, 
+            rozwijając warsztat zarówno w pracy przed kamerą, jak i na scenie. 
+            Interesuje mnie kino psychologiczne, role wymagające wewnętrznej pracy i subtelnych środków wyrazu.
+          </p>
+
+          <div class="tag-list">
+            <div class="tag">Praca przed kamerą</div>
+            <div class="tag">Teatr</div>
+            <div class="tag">Improwizacja</div>
+            <div class="tag">Praca zespołowa</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>W skrócie</h3>
+          <p>
+            • Wzrost: <strong>[tu wpisz wzrost]</strong><br />
+            • Wiek z wyglądu: <strong>[tu wpisz przedział, np. 25–32]</strong><br />
+            • Języki: <strong>[np. polski, angielski]</strong><br />
+            • Umiejętności dodatkowe: <strong>[np. taniec, śpiew, sport, instrument]</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- DELIKATNE ZDJĘCIE NA TEKŚCIE -->
+      <div class="floating-photo">
+        <!-- PODMIENIĆ NA JEDNO ZE ZDJĘĆ PORTRETOWYCH -->
+        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Portret aktorski" />
+      </div>
+    </section>
+
+    <!-- DOŚWIADCZENIE -->
+    <section id="doswiadczenie">
+      <div class="section-label">Doświadczenie</div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Teatr / Kamera</h3>
+          <p>
+            <!-- PODMIENIĆ NA KONKRETNE PROJEKTY -->
+            • Rola w spektaklu <strong>„[tytuł]”</strong>, reż. [reżyser], [teatr / scena]<br />
+            • Udział w produkcji filmowej / serialowej <strong>„[tytuł]”</strong><br />
+            • Zdjęcia próbne do <strong>[projekt / wytwórnia]</strong><br />
+            • Warsztaty z <strong>[nazwisko / szkoła]</strong>
+          </p>
+        </div>
+        <div class="card">
+          <h3>Co wnoszę do współpracy</h3>
+          <p>
+            Spokój, punktualność i przygotowanie. Lubię, kiedy praca na planie jest partnerska – 
+            kiedy można rozmawiać, szukać i proponować. Jestem otwarty na uwagi, a jednocześnie 
+            samodzielny w budowaniu roli. Zależy mi na tym, żeby każdy projekt był spotkaniem, 
+            a nie tylko zadaniem do odhaczenia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria">
+      <div class="section-label">Galeria</div>
+      <h2 class="section-title">Wybrane zdjęcia</h2>
+      <p class="section-text">
+        Poniżej możesz zobaczyć kilka kadrów – portrety, ujęcia z planu i zdjęcia, które najlepiej
+        oddają mój charakter przed kamerą. Zdjęcia w tle strony również pochodzą z tej selekcji.
+      </p>
+
+      <div class="gallery">
+        <!-- PODMIENIĆ SRC NA SWOJE ZDJĘCIA -->
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Zdjęcie aktorskie 1" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" alt="Zdjęcie aktorskie 2" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Zdjęcie aktorskie 3" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" alt="Zdjęcie aktorskie 4" />
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT / LINKI -->
+    <section id="kontakt">
+      <div class="section-label">Kontakt</div>
+      <h2 class="section-title">Współpraca</h2>
+      <p class="section-text">
+        Jeśli chcesz porozmawiać o współpracy, castingu lub zdjęciach próbnych – napisz lub zadzwoń.
+        Chętnie wyślę pełne CV, showreel lub dodatkowe materiały.
+      </p>
+
+      <div class="links-list">
+        <!-- PODMIENIĆ DANE KONTAKTOWE I LINKI -->
+        <a class="link-item" href="mailto:twoj.mail@example.com">
+          <div>
+            E-mail
+            <br />
+            <span>twoj.mail@example.com</span>
+          </div>
+          <div>✉️</div>
+        </a>
+
+        <a class="link-item" href="tel:+48123456789">
+          <div>
+            Telefon
+            <br />
+            <span>+48 123 456 789</span>
+          </div>
+          <div>📞</div>
+        </a>
+
+        <a class="link-item" href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+          <div>
+            Instagram
+            <br />
+            <span>@twoj_profil</span>
+          </div>
+          <div>↗</div>
+        </a>
+
+        <a class="link-item" href="https://www.youtube.com/" target="_blank" rel="noreferrer">
+          <div>
+            Showreel / wideo
+            <br />
+            <span>Link do materiałów wideo</span>
+          </div>
+          <div>▶</div>
+        </a>
       </div>
     </section>
   </main>
 
-  <script>
-    const slides = document.querySelectorAll(".bg-slide");
+  <footer>
+    © <span id="year"></span> Bartłomiej Wiater – portfolio aktorskie
+  </footer>
 
+  <script>
+    // ROK W STOPCE
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // TŁO ZE ZDJĘCIAMI – PODMIENISZ TE LINKI NA SWOJE
     const bgImages = [
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
       "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
     ];
 
-    let index = 0;
+    let currentBgIndex = 0;
+    const bgEl = document.getElementById("bg-slideshow");
 
-    slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
-    slides[1].style.backgroundImage = `url('${bgImages[1]}')`;
-
-    function changeSlide() {
-      slides[0].classList.toggle("active");
-      slides[1].classList.toggle("active");
-
-      index = (index + 1) % bgImages.length;
-
-      const inactive = [...slides].find(s => !s.classList.contains("active"));
-      inactive.style.backgroundImage = `url('${bgImages[index]}')`;
+    function updateBackground() {
+      bgEl.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+      currentBgIndex = (currentBgIndex + 1) % bgImages.length;
     }
 
-    setInterval(changeSlide, 6000);
-  </script>
-
-  <script>
-    const heroName = document.querySelector(".hero-name");
-    const heroTagline = document.querySelector(".hero-tagline");
-
-    function toggleHeroVisibility() {
-      const scrollY = window.scrollY;
-
-      if (scrollY < 100) {
-        heroName.classList.add("hero-visible");
-        heroName.classList.remove("hero-hidden");
-        heroTagline.classList.add("hero-visible");
-        heroTagline.classList.remove("hero-hidden");
-      } else {
-        heroName.classList.add("hero-hidden");
-        heroName.classList.remove("hero-visible");
-        heroTagline.classList.add("hero-hidden");
-        heroTagline.classList.remove("hero-visible");
-      }
-    }
-
-    window.addEventListener("scroll", toggleHeroVisibility);
-    window.addEventListener("load", toggleHeroVisibility);
+    updateBackground();
+    setInterval(updateBackground, 7000); // co 7 sekund zmiana zdjęcia
   </script>
 </body>
 </html>
