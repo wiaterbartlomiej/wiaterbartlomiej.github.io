@@ -5,19 +5,7 @@
   <title>Bartłomiej Wiater – Portfolio aktorskie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio aktorskie Bartłomieja Wiatera – zdjęcia, informacje, doświadczenie, kontakt." />
-
   <style>
-    :root {
-      --bg-main: #05060a;
-      --bg-secondary: #10131b;
-      --accent: #c7a46a;
-      --accent-soft: rgba(199, 164, 106, 0.25);
-      --text-main: #f5f5f5;
-      --text-muted: #b3b3b3;
-      --max-width: 960px;
-      --transition-fast: 0.25s ease;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -26,15 +14,14 @@
 
     html, body {
       height: 100%;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, sans-serif;
       background-color: #000;
-      color: var(--text-main);
+      color: #f5f5f5;
       scroll-behavior: smooth;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* TŁO — CZYSTA, POPRAWNA WERSJA */
     .bg-slideshow {
       position: fixed;
       inset: 0;
@@ -67,7 +54,6 @@
       pointer-events: none;
     }
 
-    /* NAWIGACJA */
     header {
       position: sticky;
       top: 0;
@@ -78,7 +64,7 @@
     }
 
     .nav {
-      max-width: var(--max-width);
+      max-width: 960px;
       margin: 0 auto;
       padding: 0.75rem 1.5rem;
       display: flex;
@@ -90,7 +76,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #b3b3b3;
     }
 
     .nav-links {
@@ -100,11 +86,11 @@
     }
 
     .nav-links a {
-      color: var(--text-muted);
+      color: #b3b3b3;
       text-decoration: none;
       position: relative;
       padding-bottom: 0.15rem;
-      transition: color var(--transition-fast);
+      transition: color 0.25s ease;
     }
 
     .nav-links a::after {
@@ -114,19 +100,18 @@
       bottom: 0;
       width: 0;
       height: 1px;
-      background: var(--accent);
-      transition: width var(--transition-fast);
+      background: #c7a46a;
+      transition: width 0.25s ease;
     }
 
     .nav-links a:hover {
-      color: var(--text-main);
+      color: #f5f5f5;
     }
 
     .nav-links a:hover::after {
       width: 100%;
     }
 
-    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -135,6 +120,7 @@
       align-items: center;
       text-align: center;
       gap: 2.5rem;
+      padding: 0 1.5rem;
     }
 
     .hero-name {
@@ -145,7 +131,7 @@
     }
 
     .hero-tagline {
-      color: var(--text-muted);
+      color: #b3b3b3;
       font-size: 0.95rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -163,134 +149,49 @@
       transform: translateY(0);
     }
 
-    /* SEKCJE */
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-    }
-
-    section {
-      margin: 4rem 0;
-      position: relative;
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-text {
-      color: var(--text-muted);
-      line-height: 1.7;
-      font-size: 0.98rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 1.75rem;
-      align-items: flex-start;
-    }
-
     @media (max-width: 768px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
+      .hero {
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
       }
-    }
 
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
+      .hero-name {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        word-break: break-word;
+      }
 
-    .gallery-item {
-      position: relative;
-      border-radius: 1rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.6);
-    }
+      .hero-tagline {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        max-width: 90%;
+        margin: 0 auto;
+      }
 
-    .gallery-item img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.8s ease, filter 0.8s ease;
-      filter: grayscale(20%) contrast(1.05);
-    }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
 
-    .gallery-item:hover img {
-      transform: scale(1.05);
-      filter: grayscale(0%);
-    }
-
-    /* KONTAKT */
-    .links-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .link-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.9rem 1rem;
-      border-radius: 0.9rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.55);
-      text-decoration: none;
-      color: var(--text-main);
-      font-size: 0.9rem;
-      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .link-item:hover {
-      background: rgba(0,0,0,0.85);
-      border-color: var(--accent-soft);
-      transform: translateY(-1px);
-    }
-
-    footer {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      text-align: center;
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- TŁO -->
   <div class="bg-slideshow">
     <div class="bg-slide active"></div>
     <div class="bg-slide"></div>
   </div>
   <div class="bg-overlay"></div>
 
-  <!-- NAWIGACJA -->
   <header>
     <nav class="nav">
-      <div class="nav-title">Portfolio aktorskie</div>
+      <div class="nav-title">PORTFOLIO AKTORSKIE</div>
       <div class="nav-links">
         <a href="#o-mnie">O mnie</a>
         <a href="#doswiadczenie">Doświadczenie</a>
@@ -301,128 +202,19 @@
   </header>
 
   <main>
-
-    <!-- HERO -->
     <section class="hero">
       <div>
         <div class="hero-name hero-visible">
-          <span>Bartłomiej</span>
-          <span>Wiater</span>
+          <span>BARTŁOMIEJ</span>
+          <span>WIATER</span>
         </div>
         <p class="hero-tagline hero-hidden">
-          aktor • lektor • wokalista
+          AKTOR • LEKTOR • WOKALISTA
         </p>
       </div>
     </section>
-
-    <!-- O MNIE -->
-    <section id="o-mnie">
-      <div class="section-label">O mnie</div>
-      <div class="grid-2">
-        <div>
-          <h2 class="section-title">Kim jestem na scenie i przed kamerą</h2>
-          <p class="section-text">
-            Jestem aktorem, dla którego najważniejsze jest prawdziwe spotkanie – z partnerem,
-            z kamerą i z widzem. Pracuję w spokojnej, uważnej atmosferze, ale zawsze z pełnym
-            zaangażowaniem i gotowością do szukania nowych rozwiązań.
-            <br /><br />
-            Ukończyłem <strong>Akademię Sztuk Teatralnych w Krakowie</strong>,
-            rozwijając warsztat zarówno w pracy przed kamerą, jak i na scenie.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>W skrócie</h3>
-          <p>
-            • Wzrost: <strong>196cm</strong><br />
-            • Wiek: <strong>28–35</strong><br />
-            • Języki: <strong>polski, angielski</strong><br />
-            • Umiejętności: <strong>śpiew, instrumenty, ogień</strong>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- DOŚWIADCZENIE -->
-    <section id="doswiadczenie">
-      <div class="section-label">Doświadczenie</div>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Teatr / Kamera</h3>
-          <p>
-            • Rola w spektaklu <strong>„[tytuł]”</strong><br />
-            • Udział w produkcji filmowej <strong>„[tytuł]”</strong><br />
-            • Zdjęcia próbne do <strong>[projekt]</strong><br />
-            • Warsztaty z <strong>[nazwisko]</strong>
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Co wnoszę</h3>
-          <p>
-            Spokój, punktualność, przygotowanie. Lubię partnerską pracę na planie,
-            rozmowę, szukanie i proponowanie.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALERIA -->
-    <section id="galeria">
-      <div class="section-label">Galeria</div>
-      <h2 class="section-title">Wybrane zdjęcia</h2>
-
-      <div class="gallery">
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" />
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" />
-        </div>
-      </div>
-    </section>
-
-    <!-- KONTAKT -->
-    <section id="kontakt">
-      <div class="section-label">Kontakt</div>
-      <h2 class="section-title">Współpraca</h2>
-
-      <div class="links-list">
-        <a class="link-item" href="mailto:twoj.mail@example.com">
-          <div>E-mail<br /><span>twoj.mail@example.com</span></div>
-          <div>✉️</div>
-        </a>
-
-        <a class="link-item" href="tel:+48123456789">
-          <div>Telefon<br /><span>+48 123 456 789</span></div>
-          <div>📞</div>
-        </a>
-
-        <a class="link-item" href="https://www.instagram.com/" target="_blank">
-          <div>Instagram<br /><span>@twoj_profil</span></div>
-          <div>↗</div>
-        </a>
-
-        <a class="link-item" href="https://www.youtube.com/" target="_blank">
-          <div>Showreel<br /><span>Link do materiałów</span></div>
-          <div>▶</div>
-        </a>
-      </div>
-    </section>
-
   </main>
 
-  <footer>
-    © <span id="year"></span> Bartłomiej Wiater – portfolio aktorskie
-  </footer>
-
-  <!-- SLIDESHOW -->
   <script>
     const slides = document.querySelectorAll(".bg-slide");
 
@@ -450,7 +242,6 @@
     setInterval(changeSlide, 6000);
   </script>
 
-  <!-- HERO SCROLL -->
   <script>
     const heroName = document.querySelector(".hero-name");
     const heroTagline = document.querySelector(".hero-tagline");
@@ -471,4 +262,8 @@
       }
     }
 
-    window
+    window.addEventListener("scroll", toggleHeroVisibility);
+    window.addEventListener("load", toggleHeroVisibility);
+  </script>
+</body>
+</html>
