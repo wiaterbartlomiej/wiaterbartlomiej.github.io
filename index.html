@@ -456,6 +456,16 @@
     transform: translateY(0);
   }
 }
+    /* ZANIKANIE HERO PRZY SCROLLOWANIU */
+
+.hero-animate {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-animate.hide {
+  opacity: 0;
+  transform: translateY(-40px);
+}
   </style>
 </head>
 <body>
@@ -477,7 +487,7 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero hero-animate">
+    <section class="hero hero-animate" id="hero">
       <div>
         <div class="hero-name fade-up">
           <!-- ZMIEŃ NA SWOJĄ FORMĘ IMIENIA I NAZWISKA -->
