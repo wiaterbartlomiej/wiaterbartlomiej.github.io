@@ -29,7 +29,7 @@
       background-color: #000;
       color: var(--text-main);
       scroll-behavior: smooth;
-      min-height: 100dvh;
+      min-height: 100vh;
       overflow-x: hidden;
     }
 
@@ -41,16 +41,26 @@
     /* TŁO ZE ZDJĘCIAMI */
 
     .bg-slideshow {
-      position: fixed;
+  position: fixed;
   inset: 0;
   z-index: -2;
-  background-image: url("https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg");
+  overflow: hidden;
+}
+
+.bg-slide {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: blur(4px) brightness(0.55);
   transform: scale(1.1);
-  will-change: transform;
-  background-color: #05060a;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.bg-slide.active {
+  opacity: 1;
 }
 
 .bg-slideshow::before {
@@ -338,10 +348,8 @@
         gap: 0.5rem;
       }
       .hero {
-    height: 100svh;
-    min-height: 100svh;
-        height: 100dvh;
-        min-height: 100dvh;
+        height: 100vh;
+        min-height: 100vh;
   }
     }
 
@@ -720,31 +728,36 @@
   </footer>
 
   <script>
-    // ROK W STOPCE
-    document.getElementById("year").textContent = new Date().getFullYear();
+  const slides = document.querySelectorAll(".bg-slide");
 
-    // TŁO ZE ZDJĘCIAMI – PODMIENISZ TE LINKI NA SWOJE
-    const bgImages = [
-  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-  "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
-  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
-];
+  const bgImages = [
+    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+    "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
+    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+  ];
 
-const slides = document.querySelectorAll(".bg-slide");
-let current = 0;
+  let index = 0;
 
-slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
-slides[1].style.backgroundImage = `url('${bgImages[1]}')`;
-slides[0].classList.add("active");
+  // ustawiamy pierwsze dwa zdjęcia
+  slides[0].style.backgroundImage = `url('${bgImages[0]}')`;
+  slides[1].style.backgroundImage = `url('${bgImages[1]}')`;
 
-setInterval(() => {
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
-  slides[current].style.backgroundImage =
-    `url('${bgImages[current % bgImages.length]}')`;
-}, 7000); // co 7 sekund zmiana zdjęcia
-  </script>
+  function changeSlide() {
+    // przełączamy klasę active
+    slides[0].classList.toggle("active");
+    slides[1].classList.toggle("active");
+
+    // wybieramy kolejne zdjęcie
+    index = (index + 1) % bgImages.length;
+
+    // warstwa, która NIE jest aktywna, dostaje nowe zdjęcie
+    const inactive = [...slides].find(s => !s.classList.contains("active"));
+    inactive.style.backgroundImage = `url('${bgImages[index]}')`;
+  }
+
+  setInterval(changeSlide, 6000);
+</script>
+
   
   <script>
   const heroName = document.querySelector(".hero-name");
@@ -768,6 +781,27 @@ setInterval(() => {
 
   window.addEventListener("scroll", toggleHeroVisibility);
   window.addEventListener("load", toggleHeroVisibility);
+</script>
+  
+  <script>
+  const images = [
+    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+    "https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg",
+    "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+  ];
+
+  let index = 0;
+  const bg = document.querySelector(".bg-slideshow");
+
+  // ustawiamy pierwsze zdjęcie od razu
+  bg.style.backgroundImage = `url('${images[0]}')`;
+
+  function changeBackground() {
+    index = (index + 1) % images.length;
+    bg.style.backgroundImage = `url('${images[index]}')`;
+  }
+
+  setInterval(changeBackground, 6000);
 </script>
   
 </body>
