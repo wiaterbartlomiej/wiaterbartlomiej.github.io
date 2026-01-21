@@ -438,6 +438,24 @@
         display: none;
       }
     }
+    /* ANIMACJA WEJŚCIA TEKSTU HERO */
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.fade-up.delay {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   </style>
 </head>
 <body>
@@ -459,14 +477,14 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero hero-animate">
       <div>
-        <div class="hero-name">
+        <div class="hero-name fade-up">
           <!-- ZMIEŃ NA SWOJĄ FORMĘ IMIENIA I NAZWISKA -->
           <span>Bartłomiej</span>
           <span>Wiater</span>
         </div>
-        <p class="hero-tagline">
+       <p class="hero-tagline fade-up delay">
           aktor &nbsp;•&nbsp; lektor &nbsp;•&nbsp; wokalista
         </p>
       </div>
@@ -643,6 +661,16 @@
 
     updateBackground();
     setInterval(updateBackground, 7000); // co 7 sekund zmiana zdjęcia
+    
+    const hero = document.getElementById("hero");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 120) {
+    hero.classList.add("hide");
+  } else {
+    hero.classList.remove("hide");
+  }
+});
   </script>
 </body>
 </html>
