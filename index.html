@@ -42,16 +42,24 @@
 
     .bg-slideshow {
       position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: blur(4px) brightness(0.55);
-      transform: scale(1.05);
-      transition: background-image 1s ease-in-out;
-      height: 100vh;
-      will-change: transform;
+  inset: 0;
+  z-index: -2;
+  background-image: url("https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+  will-change: transform;
+  background-color: #05060a;
+}
+
+.bg-slideshow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(12px) brightness(0.55);
+  transform: scale(1.05);
     }
 
     .bg-overlay {
@@ -701,8 +709,12 @@
     const bgEl = document.getElementById("bg-slideshow");
 
     function updateBackground() {
-      bgEl.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
-      currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+      const img = new Image();
+  img.src = bgImages[currentBgIndex];
+  img.onload = () => {
+    bgEl.style.backgroundImage = `url('${img.src}')`;
+  };
+  currentBgIndex = (currentBgIndex + 1) % bgImages.length;
     }
 
     updateBackground();
