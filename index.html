@@ -474,6 +474,15 @@
   transform: translateY(60px);
   pointer-events: none;
 }
+.link-title {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.link-item:hover .link-title {
+  color: var(--accent);
+  letter-spacing: 0.12em;
+}
   </style>
 </head>
 <body>
@@ -603,31 +612,17 @@
       <div class="links-list">
         <!-- PODMIENIĆ DANE KONTAKTOWE I LINKI -->
         <a class="link-item" href="mailto:twoj.mail@example.com">
-          <div>
-            E-mail
-            <br />
-            <span>twoj.mail@example.com</span>
-          </div>
-          <div></div>
-        </a>
+  <div class="link-title">E-mail</div>
+</a>
 
-        <a class="link-item" href="https://www.instagram.com/" target="_blank" rel="noreferrer">
-          <div>
-            Instagram
-            <br />
-            <span>@bwiaterthewind</span>
-          </div>
-          <div></div>
-        </a>
+       <a class="link-item" href="https://www.instagram.com/" target="_blank">
+  <div class="link-title">Instagram</div>
+</a>
 
-        <a class="link-item" href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-          <div>
-            Wizytówka
-            <br />
-            <span>https://youtu.be/tXSw0Qa6A2U?si=yveryAZAV2SOEE1O</span>
-          </div>
-          <div></div>
-        </a>
+
+        <a class="link-item" href="https://youtu.be/tXSw0Qa6A2U?si=yveryAZAV2SOEE1O" target="_blank">
+  <div class="link-title">Wizytówka</div>
+</a>
       </div>
     </section>
   </main>
