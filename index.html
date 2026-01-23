@@ -658,7 +658,12 @@
   <footer>
     © <span id="year"></span> Bartłomiej Wiater – portfolio aktorskie
   </footer>
-
+  
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+</div>
+  
   <script>
     // ROK W STOPCE
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -714,9 +719,5 @@ document.addEventListener("keydown", (e) => {
   }
 });
   </script>
-  <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
-</div>
 </body>
 </html>
