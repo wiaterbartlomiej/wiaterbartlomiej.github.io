@@ -483,6 +483,34 @@
   color: var(--accent);
   letter-spacing: 0.12em;
 }
+    /* LIGHTBOX – POWIĘKSZANIE ZDJĘĆ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  border-radius: 0.75rem;
+  cursor: zoom-out;
+}
+
   </style>
 </head>
 <body>
@@ -662,6 +690,33 @@ window.addEventListener("scroll", () => {
     hero.classList.remove("hide");
   }
 });
+    // LIGHTBOX – GALERIA
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+// klik poza zdjęciem = zamknij
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+
+// ESC = zamknij
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
+  }
+});
   </script>
+  <!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+</div>
 </body>
 </html>
