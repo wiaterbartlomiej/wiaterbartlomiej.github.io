@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio aktorskie Bartłomieja Wiatera – zdjęcia, informacje, doświadczenie, kontakt." />
   <style>
+    html {
+  scroll-behavior: auto;
+}
     :root {
       --bg-main: #05060a;
       --bg-secondary: #10131b;
@@ -648,16 +651,16 @@
       <div class="gallery">
         <!-- PODMIENIĆ SRC NA SWOJE ZDJĘCIA -->
         <div class="gallery-item">
-          <img src="bartlomiejwiater_siedzi.jpg" />
+          <img src="bartlomiejwiater_siedzi.jpg" loading="lazy" />
         </div>
         <div class="gallery-item">
-          <img src="bartlomiejwiater1.jpg" />
+          <img src="bartlomiejwiater1.jpg" loading="lazy" />
         </div>
         <div class="gallery-item">
-          <img src="bartlomiejwiater_sylwetka.jpg" />
+          <img src="bartlomiejwiater_sylwetka.jpg" loading="lazy" />
         </div>
         <div class="gallery-item">
-          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" alt="Zdjęcie aktorskie 4" />
+          <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg" alt="Zdjęcie aktorskie 4" loading="lazy" />
         </div>
       </div>
     </section>
@@ -724,11 +727,19 @@ if ("scrollRestoration" in history) {
     
     const hero = document.getElementById("hero");
 
+let ticking = false;
+
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 120) {
-    hero.classList.add("hide");
-  } else {
-    hero.classList.remove("hide");
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      if (window.scrollY > 120) {
+        hero.classList.add("hide");
+      } else {
+        hero.classList.remove("hide");
+      }
+      ticking = false;
+    });
+    ticking = true;
   }
 });
     // LIGHTBOX – GALERIA
