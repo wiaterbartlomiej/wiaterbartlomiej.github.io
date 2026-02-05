@@ -697,6 +697,10 @@
 </div>
   
   <script>
+    // wyłącz zapamiętywanie pozycji scrolla przez przeglądarkę
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
     // ROK W STOPCE
     document.getElementById("year").textContent = new Date().getFullYear();
 
