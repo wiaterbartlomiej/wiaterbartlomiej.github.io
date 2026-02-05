@@ -528,16 +528,21 @@
     .film-title {
   margin-top: 1.5rem;
 }
-    /* FADE-IN ZDJĘĆ W GALERII */
+/* GALERIA – PŁYNNE POJAWIANIE SIĘ ZDJĘĆ */
 .gallery-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateX(-30px);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    filter 0.7s ease;
 }
 
 .gallery-item.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
+  filter: blur(0);
 }
   </style>
 </head>
@@ -783,23 +788,25 @@ window.addEventListener("load", () => {
   }
   window.scrollTo(0, 0);
 });
-    // FADE-IN GALERII PRZY SCROLLU
+// GALERIA – POJAWIANIE SIĘ ZDJĘĆ JEDNO PO DRUGIM
 const galleryItems = document.querySelectorAll(".gallery-item");
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
+      galleryItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("visible");
+        }, index * 120); // odstęp między zdjęciami
+      });
+      observer.disconnect();
     }
   });
 }, {
-  threshold: 0.2
+  threshold: 0.25
 });
 
-galleryItems.forEach(item => {
-  observer.observe(item);
-});
+galleryItems.forEach(item => observer.observe(item));
   </script>
 </body>
 </html>
