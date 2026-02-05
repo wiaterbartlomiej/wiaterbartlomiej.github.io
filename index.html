@@ -750,10 +750,13 @@ document.addEventListener("keydown", (e) => {
     lightbox.classList.remove("active");
   }
 });
-    // zawsze startuj od góry po odświeżeniu
-window.onbeforeunload = function () {
+// zawsze startuj od góry, nawet jeśli w URL jest #sekcja
+window.addEventListener("load", () => {
+  if (window.location.hash) {
+    history.replaceState(null, "", window.location.pathname);
+  }
   window.scrollTo(0, 0);
-};
+});
   </script>
 </body>
 </html>
