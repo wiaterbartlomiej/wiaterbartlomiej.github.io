@@ -750,8 +750,9 @@ document.addEventListener("keydown", (e) => {
     lightbox.classList.remove("active");
   }
 });
-    window.onbeforeunload = function () {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // zawsze startuj od góry po odświeżeniu
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
 };
   </script>
 </body>
