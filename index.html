@@ -531,18 +531,12 @@
 /* GALERIA – PŁYNNE POJAWIANIE SIĘ ZDJĘĆ */
 .gallery-item {
   opacity: 0;
-  transform: translateX(-18px);
+  transform: translateX(-30px);
+  filter: blur(4px);
   transition:
-    opacity 0.45s cubic-bezier(.2,.9,.2,1),
-    transform 0.45s cubic-bezier(.2,.9,.2,1);
-  will-change: opacity, transform;
-/* usuń animowanie filter (ciężkie) dla płynności */
-}
-
-.gallery-item.visible {
-  opacity: 1;
-  transform: translateX(0);
-/* usuń filter: blur(0); */
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    filter 0.7s ease;
 }
 
 .gallery-item.visible {
@@ -811,18 +805,16 @@ const galleryItems = document.querySelectorAll(".gallery-item");
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      cost item = entry.target;
-      //dodaj male losowe opoznienia, ale krotsze - 60 - 140ms - dla efektu "jeden po drugim"
-      cost delay = 60 + Math.floor(Math.random() * 80);
-      setTimeout(() => item.classList.add("visible"),delay);
-      //przestan obserwowac ten element (nie bedzie znowu animowany)
-      observer.unobserve(item);
+      galleryItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("visible");
+        }, index * 120); // odstęp między zdjęciami
+      });
+      observer.disconnect();
     }
-    });
-  },{
-  root:null,
-  rootMargin: "0px 0px -10% 0px",
-  threshold: 0.2
+  });
+}, {
+  threshold: 0.25
 });
 
 galleryItems.forEach(item => observer.observe(item));
