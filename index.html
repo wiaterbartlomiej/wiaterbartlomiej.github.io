@@ -805,16 +805,18 @@ const galleryItems = document.querySelectorAll(".gallery-item");
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      galleryItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("visible");
-        }, index * 120); // odstęp między zdjęciami
-      });
-      observer.disconnect();
+      cost item = entry.target;
+      //dodaj male losowe opoznienia, ale krotsze - 60 - 140ms - dla efektu "jeden po drugim"
+      cost delay = 60 + Math.floor(Math.random() * 80);
+      setTimeout(() => item.classList.add("visible"),delay);
+      //przestan obserwowac ten element (nie bedzie znowu animowany)
+      observer.unobserve(item);
     }
-  });
-}, {
-  threshold: 0.25
+    });
+  },{
+  root:null,
+  rootMargin: "0px 0px -10% 0px",
+  threshold: 0.2
 });
 
 galleryItems.forEach(item => observer.observe(item));
