@@ -531,12 +531,18 @@
 /* GALERIA – PŁYNNE POJAWIANIE SIĘ ZDJĘĆ */
 .gallery-item {
   opacity: 0;
-  transform: translateX(-30px);
-  filter: blur(4px);
+  transform: translateX(-18px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s ease,
-    filter 0.7s ease;
+    opacity 0.45s cubic-bezier(.2,.9,.2,1),
+    transform 0.45s cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform;
+/* usuń animowanie filter (ciężkie) dla płynności */
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+/* usuń filter: blur(0); */
 }
 
 .gallery-item.visible {
